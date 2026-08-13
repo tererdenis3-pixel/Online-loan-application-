@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LOAN CALCULATOR</title>
+
+  <style>
+    :root{
+      --primary-blue: #0b6efd;
+      --accent-red:  #e03131;
+      --muted: #f4f6fb;
+      --card-bg: #ffffff;
+      --radius: 12px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,body{height:100%; margin:0; background: linear-gradient(180deg,#f7fbff 0%, #ffffff 60%); color:#0b243b;}
+    .page {
+      max-width:960px;
+      margin: 32px auto;
+      padding: 28px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .brand {
+      background: linear-gradient(90deg,var(--primary-blue), #2a9df4);
+      color: white;
+      padding: 18px 22px;
+      border-radius: 10px;
+      font-weight:700;
+      box-shadow: 0 6px 18px rgba(11,110,253,0.15);
+      font-size: 20px;
+    }
+    header h1{
+      margin:0;
+      font-size: 26px;
+      color: var(--primary-blue);
+    }
+    header p{
+      margin:0;
+      color:#334e68;
+      opacity:0.9;
+    }
+
+    .grid {
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:20px;
+      align-items:start;
+    }
+
+    .card{
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+    }
+
+    /* Left column (inputs) */
+    .field { margin-bottom:14px; }
+    label { display:block; font-weight:600; margin-bottom:6px; color:#123; }
+    .controls { display:flex; gap:12px; align-items:center; }
+    input[type="number"], input[type="range"], select, .readonly {
+      width:100%;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #dbe7fb;
+      font-size:16px;
+      background:#fff;
+      box-sizing:border-box;
+    }
+    .inline { display:flex; gap:8px; align-items:center; }
+    .small { width:140px; }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      height:10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg,var(--primary-blue), #9fd1ff);
+      outline: none;
+    }
+
+    .muted { color:#556; font-size:13px; }
+
+    /* Right column (results) */
+    .result-title { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+    .result-value { font-size:22px; font-weight:700; color:var(--primary-blue); }
+    .badge { background:var(--accent-red); color:white; padding:6px 10px; border-radius:8px; font-weight:700; }
+
+    .big-number { font-size:20px; font-weight:700; color:#0b243b; margin-bottom:6px; }
+
+    .actions { display:flex; gap:12px; margin-top:18px; }
+    .btn {
+      border: none;
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+      font-size:15px;
+    }
+    .btn-primary { background: linear-gradient(90deg,var(--primary-blue), #2a9df4); color:white; box-shadow: 0 6px 18px rgba(11,110,253,0.12); }
+    .btn-red { background: var(--accent-red); color:white; }
+    .btn-ghost { background:transparent; border:1px solid #dbe7fb; color:var(--primary-blue); }
+
+    footer { margin-top:18px; font-size:13px; color:#445; }
+
+    @media (max-width:880px){
+      .grid { grid-template-columns:1fr; }
+      .small{ width:120px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="brand">LOAN CALCULATOR</div>
+      <div>
+        <h1>Estimate your monthly repayment</h1>
+        <p class="muted">Loans available from R 1 000 to R 500 000 — fixed interest: 8% p.a.</p>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card" aria-labelledby="calculator-heading">
+        <h2 id="calculator-heading" style="margin-top:0">Calculator</h2>
+
+        <div class="field">
+          <label for="amount">Loan amount (R)</label>
+          <div class="controls">
+            <input id="amount" type="number" min="1000" max="500000" step="100" value="10000" aria-describedby="amount-help">
+            <div style="width:12px"></div>
+            <div class="small readonly" id="amount-display">R 10,000</div>
+          </div>
+          <div id="amount-help" class="muted">Min R 1 000 — Max R 500 000</div>
+        </div>
+
+        <div class="field">
+          <label for="amount-range">Adjust amount</label>
+          <input id="amount-range" type="range" min="1000" max="500000" step="100" value="10000" />
+        </div>
+
+        <div class="field">
+          <label for="duration">Duration (months)</label>
+          <div class="inline">
+            <input id="duration" type="number" min="1" max="120" step="1" value="12">
+            <select id="duration-presets" class="small">
+              <option value="">Presets</option>
+              <option value="6">6 months</option>
+              <option value="12">12 months</option>
+              <option value="24">24 months</option>
+              <option value="36">36 months</option>
+              <option value="48">48 months</option>
+              <option value="60">60 months</option>
+            </select>
+          </div>
+          <div class="muted">Choose how long you'll repay the loan</div>
+        </div>
+
+        <div class="field">
+          <label>Interest rate</label>
+          <div class="readonly" style="display:inline-block; width:120px; font-weight:700;">8.00% p.a.</div>
+          <div class="muted" style="margin-top:8px;">Fixed annual interest rate</div>
+        </div>
+
+        <div class="field">
+          <label>Repayment type</label>
+          <div style="display:flex; gap:8px; margin-top:8px;">
+            <button class="btn btn-ghost" id="calc-annuity" aria-pressed="true">Annuity (monthly)</button>
+            <button class="btn btn-ghost" id="calc-interest-only" aria-pressed="false">Interest only</button>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="btn-start">Start Application</button>
+          <button class="btn btn-red" id="btn-copy">Copy details</button>
+        </div>
+
+        <footer>
+          <p><strong>Note:</strong> This is an estimation tool. Actual loan offers depend on credit checks and bank policies.</p>
+        </footer>
+      </div>
+
+      <aside class="card" aria-labelledby="results-heading">
+        <div class="result-title">
+          <div>
+            <h3 id="results-heading" style="margin:0">Estimate</h3>
+            <div class="muted">8% p.a. — calculations updated live</div>
+          </div>
+          <div class="badge">RATES</div>
+        </div>
+
+        <div>
+          <div class="big-number">Monthly repayment</div>
+          <div class="result-value" id="monthly">R 0.00</div>
+        </div>
+
+        <hr style="margin:18px 0; border:none; border-top:1px solid #eef6ff">
+
+        <div>
+          <div class="big-number">Total interest</div>
+          <div id="total-interest">R 0.00</div>
+        </div>
+
+        <div style="margin-top:12px">
+          <div class="big-number">Total repayable</div>
+          <div id="total-repay">R 0.00</div>
+        </div>
+
+        <div style="margin-top:20px" class="muted">
+          <div>Amount: <span id="summary-amount">R 0</span></div>
+          <div>Duration: <span id="summary-duration">0</span> months</div>
+        </div>
+
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    // Helpers
+    const fmt = (v) => {
+      try {
+        return new Intl.NumberFormat('en-ZA', { style: 'currency', currency: 'ZAR', maximumFractionDigits: 2 }).format(v);
+      } catch(e){
+        return 'R ' + Number(v).toFixed(2);
+      }
+    };
+
+    // Elements
+    const amountInput = document.getElementById('amount');
+    const amountRange = document.getElementById('amount-range');
+    const amountDisplay = document.getElementById('amount-display');
+    const durationInput = document.getElementById('duration');
+    const durationPresets = document.getElementById('duration-presets');
+    const monthlyEl = document.getElementById('monthly');
+    const totalInterestEl = document.getElementById('total-interest');
+    const totalRepayEl = document.getElementById('total-repay');
+    const summaryAmount = document.getElementById('summary-amount');
+    const summaryDuration = document.getElementById('summary-duration');
+    const btnStart = document.getElementById('btn-start');
+    const btnCopy = document.getElementById('btn-copy');
+    const calcAnnuity = document.getElementById('calc-annuity');
+    const calcIO = document.getElementById('calc-interest-only');
+
+    const MIN = 1000, MAX = 500000;
+    const ANNUAL_RATE = 0.08; // 8% p.a.
+
+    let repaymentMode = 'annuity'; // 'annuity' or 'interest-only'
+
+    // Sync inputs
+    function clampAmount(v){
+      v = Number(v) || 0;
+      if(v < MIN) v = MIN;
+      if(v > MAX) v = MAX;
+      return Math.round(v/100)*100;
+    }
+    function clampDuration(v){
+      v = parseInt(v) || 0;
+      if(v < 1) v = 1;
+      if(v > 120) v = 120;
+      return v;
+    }
+
+    function updateFromAmountInput(e){
+      const v = clampAmount(e.target.value);
+      amountInput.value = v;
+      amountRange.value = v;
+      amountDisplay.textContent = fmt(v);
+      calculate();
+    }
+    function updateFromRange(e){
+      const v = clampAmount(e.target.value);
+      amountInput.value = v;
+      amountDisplay.textContent = fmt(v);
+      calculate();
+    }
+    function updateDuration(e){
+      const v = clampDuration(e.target.value);
+      durationInput.value = v;
+      durationPresets.value = '';
+      calculate();
+    }
+    function presetDuration(e){
+      if(e.target.value){
+        durationInput.value = e.target.value;
+        calculate();
+      }
+    }
+
+    // Calculation functions
+    function calculate(){
+      const P = Number(amountInput.value) || 0;
+      const n = clampDuration(durationInput.value);
+      const r = ANNUAL_RATE / 12; // monthly rate
+      let monthly = 0, total = 0, interest = 0;
+
+      if(repaymentMode === 'annuity'){
+        if(P <= 0 || n <= 0){
+          monthly = 0;
+        } else {
+          // monthly payment formula
+          monthly = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+          total = monthly * n;
+          interest = total - P;
+        }
+      } else if(repaymentMode === 'interest-only'){
+        // interest-only: monthly interest only, principal paid at end
+        monthly = P * r;
+        total = monthly * n + P;
+        interest = (monthly * n);
+      }
+
+      monthlyEl.textContent = fmt(Number.isFinite(monthly) ? monthly : 0);
+      totalInterestEl.textContent = fmt(Number.isFinite(interest) ? interest : 0);
+      totalRepayEl.textContent = fmt(Number.isFinite(total) && total>0 ? total : P);
+      summaryAmount.textContent = fmt(P);
+      summaryDuration.textContent = n;
+    }
+
+    // Start application: store values and navigate to apply.html
+    function startApplication(){
+      const amount = clampAmount(Number(amountInput.value));
+      const duration = clampDuration(Number(durationInput.value));
+      // store to localStorage so apply.html can prefill
+      try {
+        localStorage.setItem('prefill_loan', JSON.stringify({ amount, duration }));
+      } catch(e){}
+      // navigate to apply.html
+      window.location.href = 'apply.html';
+    }
+
+    // Copy details to clipboard
+    function copyDetails(){
+      const amount = clampAmount(Number(amountInput.value));
+      const duration = clampDuration(Number(durationInput.value));
+      const monthly = monthlyEl.textContent;
+      const text = `Loan estimate — Amount: ${fmt(amount)} | Duration: ${duration} months | Monthly: ${monthly} (8% p.a.)`;
+      navigator.clipboard?.writeText(text).then(()=>{
+        btnCopy.textContent = 'Copied!';
+        setTimeout(()=> btnCopy.textContent = 'Copy details', 1500);
+      }).catch(()=> {
+        alert(text);
+      });
+    }
+
+    // Mode toggles
+    calcAnnuity.addEventListener('click', () => {
+      repaymentMode = 'annuity';
+      calcAnnuity.classList.add('btn-primary');
+      calcAnnuity.style.color = '#fff';
+      calcIO.classList.remove('btn-primary');
+      calculate();
+    });
+    calcIO.addEventListener('click', () => {
+      repaymentMode = 'interest-only';
+      calcIO.classList.add('btn-primary');
+      calcIO.style.color = '#fff';
+      calcAnnuity.classList.remove('btn-primary');
+      calculate();
+    });
+
+    // Events
+    amountInput.addEventListener('input', updateFromAmountInput);
+    amountRange.addEventListener('input', updateFromRange);
+    durationInput.addEventListener('input', updateDuration);
+    durationPresets.addEventListener('change', presetDuration);
+    btnStart.addEventListener('click', startApplication);
+    btnCopy.addEventListener('click', copyDetails);
+
+    // Initialize defaults
+    (function init(){
+      amountInput.min = MIN; amountInput.max = MAX;
+      amountRange.min = MIN; amountRange.max = MAX;
+      amountRange.step = 100;
+      amountInput.value = clampAmount(amountInput.value);
+      amountRange.value = amountInput.value;
+      amountDisplay.textContent = fmt(Number(amountInput.value));
+      calculate();
+
+      // If prefill exists (from navigating back), apply it
+      try {
+        const p = JSON.parse(localStorage.getItem('prefill_loan') || 'null');
+        if(p && p.amount){ amountInput.value = clampAmount(p.amount); amountRange.value = amountInput.value; durationInput.value = clampDuration(p.duration || durationInput.value); amountDisplay.textContent = fmt(Number(amountInput.value)); calculate(); }
+      } catch(e){}
+    })();
+
+  </script>
+</body>
+</html>
